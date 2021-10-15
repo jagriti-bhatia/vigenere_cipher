@@ -22,10 +22,18 @@ void encryption(char text[],char key[])
 
      
      for(i = 0; i < textlen; ++i)
+     {
      //to convert the plain text to cipher text character wise using the vigenere cipher formula
+        if (text[i]==' ')
+        {
+            encryptedmsg[i] = ' ';
+        }
+        else
+        {
          encryptedmsg[i] = ((text[i] + newkey[i]) % 26) + 'A';
+        }
+     }
      encryptedmsg[i] = '\0'; //denote the end of the string
-
 	 printf("\nNew Generated Key: %s", newkey);
-   printf("\nEncrypted Message: %s", encryptedmsg);
+    printf("\nEncrypted Message: %s", encryptedmsg);
 }

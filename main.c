@@ -41,9 +41,11 @@ int main()
 
     case 2:
       printf("Enter the plaintext (text to be encrypted) \n");
-      scanf("%s", plaintext);
+      fflush(stdin);
+      gets(plaintext);
       printf("Enter the key \n");
-      scanf("%s", key);
+      fflush(stdin);
+      gets(key);
       strupr(plaintext);
       strupr(key);
       encryption(plaintext, key);
