@@ -51,9 +51,11 @@ int main()
 
     case 3:
       printf("Enter the encrypted text \n");
-      scanf("%s", encrypt);
+      fflush(stdin);
+      gets(encrypt); 
       printf("Enter the key\n");
-      scanf("%s", key);
+      fflush(stdin);
+      gets(key);
       strupr(encrypt);
       strupr(key);
       decryption(encrypt, key);
