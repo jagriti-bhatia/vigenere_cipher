@@ -14,7 +14,7 @@ void encryption(char text[],char key[])
         if (text[i]==' ') //wherever a space occurs in the text, it should occur in the newkey
         {
             newkey[i]=' ';
-            j--;
+            j--; //making sure letters of the key aren't missed
         }
 
         else
@@ -44,7 +44,9 @@ void encryption(char text[],char key[])
    printf("\nEncrypted Message: %s", encryptedmsg);
 }
 
+/*
 int main()
 {
     encryption("WE ARE DISCOVERED SAVE YOURSELF", "DECEPTIVE");
 }
+*/
