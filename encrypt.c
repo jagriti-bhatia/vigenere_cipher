@@ -11,19 +11,30 @@ void encryption(char text[],char key[])
     //generating new key
     for(i = 0, j = 0; i < textlen; ++i, ++j)
 	  {
-          //to repeat characters from start when the length of the ciphertext is > that of the keyword
-        if(j == keylen)
-            j = 0;
+        if (text[i]==' ') //wherever a space occurs in the text, it should occur in the newkey
+            newkey[i]=' ';
 
-        //to generate a new key from the given keyword such that the length of newkey = length of ciphertext
-        newkey[i] = key[j];
+        else
+        {
+            //to repeat characters from start when the length of the ciphertext is > that of the keyword
+            if(j == keylen)
+                j = 0;
+
+            //to generate a new key from the given keyword such that the length of newkey = length of ciphertext
+            newkey[i] = key[j];
+        }       
     }
     newkey[i] = '\0'; //denote the end of a string
 
      
      for(i = 0; i < textlen; ++i)
+     {
      //to convert the plain text to cipher text character wise using the vigenere cipher formula
-         encryptedmsg[i] = ((text[i] + newkey[i]) % 26) + 'A';
+         if (text[i]==' ') //wherever a space occurs in the text, it should occur in the encryptedmsg
+            encryptedmsg[i]=' ';
+         else
+            encryptedmsg[i] = ((text[i] + newkey[i]) % 26) + 'A';
+     }
      encryptedmsg[i] = '\0'; //denote the end of the string
 
 	 printf("\nNew Generated Key: %s", newkey);
