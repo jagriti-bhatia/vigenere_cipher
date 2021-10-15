@@ -22,7 +22,7 @@ void file_encryption(char key[])
         }
         //printf("cipher text length: %d\n", ciphertext_len);
 
-        char newKey[ciphertext_len];
+        char *newKey = (char*)malloc((ciphertext_len+1)*sizeof(char));
 
         //generating new key
         for (i = 0, j = 0; i < ciphertext_len; ++i, ++j)
@@ -34,8 +34,6 @@ void file_encryption(char key[])
         }
         newKey[i] = '\0';
         printf("\nNew Generated Key: %s\n", newKey);
-
-        
     }
     fclose(f1);
 }
