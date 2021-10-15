@@ -21,12 +21,13 @@ void file_decryption(char key[])
         int ciphertext_len = 0;
         for (int i = 0; (ch = fgetc(f1)) != EOF; i++)
         {
-            if ((ch >= 'A') && (ch <= 'Z'))
+            if (((ch >= 'A') && (ch <= 'Z')) || ch == 32)
                 ciphertext_len++;
         }
         //printf("cipher text length: %d\n", ciphertext_len);
 
         char *newKey = (char*)malloc((ciphertext_len+1)*sizeof(char));
+        char *decryptedMessage = (char*)malloc((ciphertext_len+1)*sizeof(char));
 
         //generating new key
         for (i = 0, j = 0; i < ciphertext_len; ++i, ++j)
@@ -39,7 +40,18 @@ void file_decryption(char key[])
         newKey[i] = '\0';
         printf("\nNew Generated Key: %s\n", newKey);
 
-        
+        rewind(f1);
+        FILE *f2 = fopen("filedecrypt.txt", "w");
+        ch = '0';
+        for(i = 0; i < ciphertext_len && (ch = fgetc(f1)) != EOF; i++)
+        {
+            if(ch != 32) {decryptedMessage[i] = (((ch - newKey[i]) + 26) % 26) + 'A';}
+            else {decryptedMessage[i] = ch;}
+            fputc(decryptedMessage[i], f2);
+        }
+        decryptedMessage[i] = '\0';
+        printf("\nActual Message: %s", decryptedMessage);
+        fclose(f2);
         
     }
     fclose(f1);
