@@ -41,9 +41,9 @@ int main()
 
     case 2:
       printf("Enter the plaintext (text to be encrypted) \n");
-      scanf("%s", plaintext);
+      scanf("%[^\n]s", plaintext);
       printf("Enter the key \n");
-      scanf("%s", key);
+      scanf("%[^\n]s", key);
       strupr(plaintext);
       strupr(key);
       encryption(plaintext, key);
@@ -51,9 +51,9 @@ int main()
 
     case 3:
       printf("Enter the encrypted text \n");
-      scanf("%s", encrypt);
+      scanf("%[^\n]s", encrypt);
       printf("Enter the key\n");
-      scanf("%s", key);
+      scanf("%[^\n]s", key);
       strupr(encrypt);
       strupr(key);
       decryption(encrypt, key);
