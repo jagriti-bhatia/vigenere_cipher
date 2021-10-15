@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "header.h"
 
@@ -25,7 +26,7 @@ void file_decryption(char key[])
         }
         //printf("cipher text length: %d\n", ciphertext_len);
 
-        char newKey[ciphertext_len];
+        char *newKey = (char*)malloc((ciphertext_len+1)*sizeof(char));
 
         //generating new key
         for (i = 0, j = 0; i < ciphertext_len; ++i, ++j)

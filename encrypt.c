@@ -1,12 +1,14 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 //parameters for the plaintext and the keyword
 void encryption(char text[],char key[])
 {
     int textlen = strlen(text), keylen = strlen(key), i, j;
     //defining array for encrypted message and key generated
-    char newkey[textlen], encryptedmsg[textlen];
+    char *newkey = (char*)malloc((textlen+1)*sizeof(char));
+    char *encryptedmsg = (char*)malloc((textlen+1)*sizeof(char));
 
     //generating new key
     for(i = 0, j = 0; i < textlen; ++i, ++j)

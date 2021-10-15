@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 //parameters for the cipher text and the keyword
@@ -9,7 +10,8 @@ void decryption(char ciphertext[], char key[])
     int i, j; //integers to run for loop
 
     //defining array for the decrypted message and the key generated
-    char new_key[ciphertext_len], decrypted_msg[ciphertext_len]; 
+    char *new_key = (char*)malloc((ciphertext_len+1)*sizeof(char));
+    char *decrypted_msg = (char*)malloc((ciphertext_len+1)*sizeof(char));
 
     //generating new key
     for(i = 0, j = 0; i < ciphertext_len; ++i, ++j) 
