@@ -14,6 +14,12 @@ void decryption(char ciphertext[], char key[])
     //generating new key
     for(i = 0, j = 0; i < ciphertext_len; ++i, ++j) 
     {
+        if (ciphertext[i]==' ') //wherever a space occurs in the text, it should occur in the newkey
+        {
+            new_key[i]=' ';
+            j--; //making sure letters of the key aren't missed
+        }
+
         //to repeat characters from start when the length of the ciphertext is > that of the keyword
         if(j == key_len) 
             j = 0;
@@ -25,10 +31,22 @@ void decryption(char ciphertext[], char key[])
 
     //decryption
     for(i = 0; i < ciphertext_len; ++i)
+    {
+        if (ciphertext[i]==' ') //wherever a space occurs in the text, it should occur in the decryptedmsg
+            decrypted_msg[i]=' ';
         //to convert the cipher text to plain text character wise using the vigenere cipher formula
-        decrypted_msg[i] = (((ciphertext[i] - new_key[i]) + 26) % 26) + 'A'; 
+        else
+            decrypted_msg[i] = (((ciphertext[i] - new_key[i]) + 26) % 26) + 'A'; 
+    }
     decrypted_msg[i] = '\0'; //denote the end of a string
 
     printf("\nNew Generated Key: %s", new_key);
     printf("\nDecrypted Message: %s", decrypted_msg);
 }
+
+/* //DEMO
+int main()
+{
+    decryption("ZI CVT WQNGRZGVTW AVZH CQYGLMGJ", "DECEPTIVE");
+}
+*/
