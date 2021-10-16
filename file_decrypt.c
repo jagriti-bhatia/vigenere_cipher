@@ -20,15 +20,15 @@ void file_decryption(char key[])
         int ciphertext_len = 0;
         for (int i = 0; (ch = fgetc(f1)) != EOF; i++)
         {
-            if ((ch >= 'A') && (ch <= 'Z'))
+            if (((ch >= 'A') && (ch <= 'Z'))||(ch >= 'a') && (ch <= 'z'))
                 ciphertext_len++;
         }
-        //printf("cipher text length: %d\n", ciphertext_len);
 
+   char ciphertext[ciphertext_len];
         char newKey[ciphertext_len];
-
+      char  decrypted_msg[ciphertext_len];
         //generating new key
-        for (i = 0, j = 0; i < ciphertext_len; ++i, ++j)
+        for ( int i , j = 0; i < ciphertext_len; ++i, ++j)
         {
             if (j == keyLen)
                 j = 0;
@@ -38,8 +38,28 @@ void file_decryption(char key[])
         newKey[i] = '\0';
         printf("\nNew Generated Key: %s\n", newKey);
 
+//decryption
+char c;
+
+    for(i = 0; i < ciphertext_len; ++i)
+    {
+        c=fgetc(f1);
+        if (feof(f1))
+         break;
+        ciphertext[i]=c;
+    }
+    for(i = 0; i < ciphertext_len; ++i)
+    {        //to convert the cipher text to plain text character wise using the vigenere cipher formula
+        decrypted_msg[i] = (((ciphertext[i] - newKey[i]) + 26) % 26) + 'A'; 
+    }
+    decrypted_msg[i] = '\0'; //denote the end of a string
         
         
     }
+
+ for( int i = 0; i <  ciphertext_len; i++)
+ {
+     printf(" %s",decrypted_msg);
+ }
     fclose(f1);
 }
