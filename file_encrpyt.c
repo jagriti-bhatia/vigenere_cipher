@@ -5,18 +5,18 @@
 
 void file_encryption(char key[])
 {
-    FILE *f1 = fopen("plaintext.txt", "r");
-
-    if (f1 == NULL)
-        printf("error in opening the file");
-
-    else
+    char c,sentence[20];
+    printf("\nDo you want to input string(y/n): ");
+    scanf("%c",&c);
+    if(c=='y')
     {
-        char ch;
+        printf("\nenter string: ");
+        scanf("%[^/n]s",sentence);
+      
         int keyLen = strlen(key), i, j;
-
+        int n= strlen(sentence);
         int ciphertext_len = 0;
-        for (int i = 0; (ch = fgetc(f1)) != EOF; i++)
+        for (int i = 0;i<n; i++)
         {
             if (((ch >= 'A') && (ch <= 'Z')) || ch == 32)
                 ciphertext_len++;
@@ -35,20 +35,53 @@ void file_encryption(char key[])
             newKey[i] = key[j];
         }
         newKey[i] = '\0';
-        printf("\nNew Generated Key: %s\n", newKey);
-
-        rewind(f1);
-        FILE *f2 = fopen("fileencrypt.txt", "w");
-        ch = '0';
-        for(i = 0; i < ciphertext_len && (ch = fgetc(f1)) != EOF; i++)
-        {
-            if(ch != 32) {encryptedMessage[i] = ((ch + newKey[i]) % 26) + 'A';}
-            else {encryptedMessage[i] = ch;}
-            fputc(encryptedMessage[i], f2);
-        }
-        encryptedMessage[i] = '\0';
-        printf("\nEncrypted Message: %s", encryptedMessage);
-        fclose(f2);
+        printf("\nNew Generated Key: %s\n", newKey); 
     }
-    fclose(f1);
+    else
+    {
+        FILE *f1 = fopen("plaintext.txt", "r");
+
+        if (f1 == NULL)
+            printf("error in opening the file");
+
+        else
+        {
+            char ch;
+            int keyLen = strlen(key), i, j;
+
+            int ciphertext_len = 0;
+            for (int i = 0; (ch = fgetc(f1)) != EOF; i++)
+            {
+                if ((ch >= 'A') && (ch <= 'Z'))
+                    ciphertext_len++;
+            }
+            //printf("cipher text length: %d\n", ciphertext_len);
+
+            char newKey[ciphertext_len];
+
+            //generating new key
+            for (i = 0, j = 0; i < ciphertext_len; ++i, ++j)
+            {
+                if (j == keyLen)
+                    j = 0;
+                newKey[i] = key[j];
+            }
+            newKey[i] = '\0';
+            printf("\nNew Generated Key: %s\n", newKey);
+          
+            rewind(f1);
+            FILE *f2 = fopen("fileencrypt.txt", "w");
+            ch = '0';
+            for(i = 0; i < ciphertext_len && (ch = fgetc(f1)) != EOF; i++)
+            {
+                if(ch != 32) {encryptedMessage[i] = ((ch + newKey[i]) % 26) + 'A';}
+                else {encryptedMessage[i] = ch;}
+                fputc(encryptedMessage[i], f2);
+            }
+            encryptedMessage[i] = '\0';
+            printf("\nEncrypted Message: %s", encryptedMessage);
+            fclose(f2);
+        }
+        fclose(f1);
+    }
 }
