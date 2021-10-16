@@ -51,7 +51,7 @@ int main()
 
     case 3:
       printf("Enter the encrypted text \n");
-      scanf("%s", encrypt);
+      scanf("%[^\n]", encrypt);
       printf("Enter the key\n");
       scanf("%s", key);
       strupr(encrypt);
