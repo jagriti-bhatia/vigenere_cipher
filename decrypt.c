@@ -28,7 +28,8 @@ void decryption(char ciphertext[], char key[])
     //decryption
     for(i = 0; i < ciphertext_len; ++i)
         //to convert the cipher text to plain text character wise using the vigenere cipher formula
-        decrypted_msg[i] = (((ciphertext[i] - new_key[i]) + 26) % 26) + 'A'; 
+        if(ciphertext[i] >= 'A' && ciphertext[i] <= 'Z'){decrypted_msg[i] = (((ciphertext[i] - new_key[i]) + 26) % 26) + 'A';}
+        else{decrypted_msg[i] = ciphertext[i];} 
     decrypted_msg[i] = '\0'; //denote the end of a string
 
     printf("\nNew Generated Key: %s", new_key);
