@@ -25,7 +25,8 @@ void encryption(char text[],char key[])
      
      for(i = 0; i < textlen; ++i)
      //to convert the plain text to cipher text character wise using the vigenere cipher formula
-         encryptedmsg[i] = ((text[i] + newkey[i]) % 26) + 'A';
+         if(text[i] >= 'A' && text[i] <= 'Z'){encryptedmsg[i] = ((text[i] + newkey[i]) % 26) + 'A';}
+         else{encryptedmsg[i] = text[i];}
      encryptedmsg[i] = '\0'; //denote the end of the string
 
 	 printf("\nNew Generated Key: %s", newkey);
